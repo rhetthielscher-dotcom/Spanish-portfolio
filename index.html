@@ -3,77 +3,75 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Spanish Class Portfolio — Material</title>
-  <meta name="description" content="A single‑file Spanish class portfolio with a modern Material look." />
+  <title>Spanish Class Portfolio — Teal/Amber (High Contrast)</title>
+  <meta name="description" content="Material-inspired, single-file Spanish class portfolio with improved legibility." />
   <style>
-    /* ============ Material-inspired Design System (no external libs) ============ */
+    /* ============ Material-inspired Design System (Teal/Amber) ============ */
     :root{
-      --md-sys-color-primary: #6750A4;   /* Material baseline primary */
+      --md-sys-color-primary: #0D9488;   /* teal-600 */
       --md-sys-color-on-primary: #FFFFFF;
-      --md-sys-color-secondary: #625B71;
-      --md-sys-color-surface: #FFFBFE;
-      --md-sys-color-surface-variant: #E7E0EC;
-      --md-sys-color-outline: #79747E;
-      --md-sys-color-on-surface: #1C1B1F;
-      --md-sys-elevation-1: 0 1px 2px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08);
-      --md-sys-elevation-2: 0 2px 6px rgba(0,0,0,0.14), 0 6px 12px rgba(0,0,0,0.06);
-      --container-max: 1100px;
+      --md-sys-color-secondary: #F59E0B; /* amber-500 */
+      --md-sys-color-surface: #0f172a;   /* deep slate backdrop for nicer contrast */
+      --md-sys-color-surface-variant: #1f2937; /* slate-800 */
+      --md-sys-color-outline: #334155;   /* slate-700 */
+      --md-sys-color-on-surface: #E2E8F0;/* slate-200 */
+      --md-sys-elevation-1: 0 1px 2px rgba(2,6,23,0.12), 0 2px 6px rgba(2,6,23,0.16);
+      --container-max: 1120px;
     }
-    @media (prefers-color-scheme: dark){
+    @media (prefers-color-scheme: light){
       :root{
-        --md-sys-color-primary: #D0BCFF;
-        --md-sys-color-on-primary: #381E72;
-        --md-sys-color-secondary: #CCC2DC;
-        --md-sys-color-surface: #1C1B1F;
-        --md-sys-color-surface-variant: #49454F;
-        --md-sys-color-outline: #938F99;
-        --md-sys-color-on-surface: #E6E1E5;
+        --md-sys-color-surface: #F8FAFC;   /* slate-50 */
+        --md-sys-color-surface-variant: #E2E8F0; /* slate-200 */
+        --md-sys-color-outline: #94A3B8;   /* slate-400 */
+        --md-sys-color-on-surface: #0F172A; /* slate-900 */
       }
     }
     *{ box-sizing:border-box }
-    html,body{ margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:var(--md-sys-color-on-surface); background:linear-gradient(180deg, var(--md-sys-color-surface), #fff); }
+    html,body{ margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:var(--md-sys-color-on-surface); background:linear-gradient(180deg, var(--md-sys-color-surface), #0b1220); }
     a{ color:inherit; text-decoration:none }
     .container{ max-width:var(--container-max); margin:0 auto; padding:0 16px }
-    .appbar{ position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(8px); background:color-mix(in oklab, var(--md-sys-color-surface) 92%, transparent); border-bottom:1px solid var(--md-sys-color-surface-variant) }
+    .appbar{ position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(8px); background:rgba(2,6,23,.45); border-bottom:1px solid var(--md-sys-color-surface-variant) }
     .appbar-inner{ display:flex; align-items:center; justify-content:space-between; padding:12px 0 }
     .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px }
-    .brand .dot{ width:12px; height:12px; border-radius:50%; background:var(--md-sys-color-primary); box-shadow: 0 0 0 4px color-mix(in oklab, var(--md-sys-color-primary) 25%, transparent) }
+    .brand .dot{ width:12px; height:12px; border-radius:50%; background:#14b8a6; box-shadow: 0 0 0 4px rgba(20,184,166,.25) }
     .nav a{ font-size:14px; padding:8px 10px; border-radius:10px }
-    .nav a:hover{ background:color-mix(in oklab, var(--md-sys-color-primary) 14%, transparent) }
+    .nav a:hover{ background:rgba(20,184,166,.14) }
     .hero{ padding:56px 0 24px }
-    .hero h1{ font-size:clamp(28px, 5vw, 48px); margin:0 0 8px; font-weight:900; letter-spacing:-.02em }
-    .hero p{ margin:0; color:color-mix(in oklab, var(--md-sys-color-on-surface) 70%, transparent) }
+    .hero h1{ font-size:clamp(28px, 5vw, 52px); margin:0 0 8px; font-weight:900; letter-spacing:-.02em }
+    .hero p{ margin:0; opacity:.95 }
     .btn-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:20px }
     /* Material buttons with ripple */
     .btn{ position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:999px; border:1px solid transparent; cursor:pointer; user-select:none; transition:transform .04s ease, box-shadow .2s ease }
     .btn:active{ transform:translateY(1px) }
-    .btn.primary{ background:var(--md-sys-color-primary); color:var(--md-sys-color-on-primary); box-shadow:var(--md-sys-elevation-1) }
-    .btn.outline{ background:transparent; color:var(--md-sys-color-on-surface); border-color:var(--md-sys-color-outline) }
-    .btn.tonal{ background:color-mix(in oklab, var(--md-sys-color-primary) 16%, white); color:var(--md-sys-color-on-surface); box-shadow:var(--md-sys-elevation-1) }
-    .ripple{ position:absolute; border-radius:50%; transform:scale(0); animation:ripple .6s linear; background:color-mix(in oklab, white 60%, var(--md-sys-color-on-surface)); opacity:.35 }
+    .btn.primary{ background:#14b8a6; color:#04131a; font-weight:700; box-shadow:var(--md-sys-elevation-1) }
+    .btn.outline{ background:transparent; color:#e2e8f0; border-color:#475569 }
+    .btn.accent{ background:#f59e0b; color:#111827; font-weight:700; box-shadow:var(--md-sys-elevation-1) }
+    .ripple{ position:absolute; border-radius:50%; transform:scale(0); animation:ripple .6s linear; background:rgba(255,255,255,.55) }
     @keyframes ripple{ to{ transform:scale(16); opacity:0 } }
     /* Sections */
     section{ padding:28px 0 }
     .section-title{ display:flex; align-items:center; gap:10px; margin-bottom:14px }
-    .chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; font-size:12px; border-radius:999px; color:var(--md-sys-color-on-primary); background:var(--md-sys-color-primary) }
-    /* Cards */
-    .grid{ display:grid; grid-template-columns:1fr; gap:16px }
-    @media(min-width:820px){ .grid{ grid-template-columns:1fr 1fr } }
-    .card{ background:#fff; border:1px solid var(--md-sys-color-surface-variant); border-radius:20px; box-shadow:var(--md-sys-elevation-1) }
-    .card .content{ padding:18px }
-    .card h3{ margin:0 0 6px }
-    .muted{ color:color-mix(in oklab, var(--md-sys-color-on-surface) 68%, transparent) }
-    .well{ border:1px dashed var(--md-sys-color-outline); border-radius:16px; padding:14px; background:color-mix(in oklab, #fff 85%, var(--md-sys-color-primary) 4%) }
+    .chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; font-size:12px; border-radius:999px; color:#083344; background:var(--md-sys-color-secondary); font-weight:700 }
+    /* Cards — force strong text colors regardless of theme */
+    .grid{ display:grid; grid-template-columns:1fr; gap:18px }
+    @media(min-width:860px){ .grid{ grid-template-columns:1fr 1fr } }
+    .card{ background:#ffffff; border:1px solid #e2e8f0; border-radius:20px; box-shadow: 0 6px 18px rgba(2,6,23,.18) }
+    .card .content{ padding:20px; color:#0f172a }             /* KEY: dark text on white */
+    .card h3{ margin:0 0 8px; color:#0b1324; font-weight:800 }
+    .muted{ color:#334155 }                                   /* darker muted for contrast */
+    .well{ border:1px dashed #14b8a6; border-radius:16px; padding:14px; background:#f0fdfa; color:#0f172a } /* teal-50 bg */
+    .well strong{ color:#0b1324 }
+    .well li{ margin:6px 0 }
     /* Reflection */
-    .prose p{ line-height:1.7; margin:14px 0 }
-    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:color-mix(in oklab, #000 6%, transparent); border:1px solid var(--md-sys-color-outline); padding:1px 6px; border-radius:6px }
+    .prose p{ line-height:1.7; margin:14px 0; color:#111827 }
     /* Footer */
-    footer{ padding:32px 0; border-top:1px solid var(--md-sys-color-surface-variant); margin-top:16px }
+    footer{ padding:32px 0; border-top:1px solid #1f2937; margin-top:16px }
     /* Utilities */
     .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
     .spacer{ height:8px }
     .about-grid{ display:grid; grid-template-columns:1fr; gap:18px }
     @media(min-width:900px){ .about-grid{ grid-template-columns:1fr 1fr } }
+    html.contrast{ filter: contrast(1.05) saturate(1.05); }
   </style>
 </head>
 <body>
@@ -96,7 +94,7 @@
         <div class="btn-row">
           <a class="btn primary" href="#samples" data-ripple><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> View Samples</a>
           <a class="btn outline" href="#reflection" data-ripple>Read Reflection</a>
-          <button class="btn tonal" id="themeToggle" data-ripple>Toggle Contrast</button>
+          <button class="btn accent" id="themeToggle" data-ripple>Toggle Contrast</button>
         </div>
       </div>
     </section>
@@ -130,7 +128,7 @@
               <div class="spacer"></div>
               <div class="well">
                 <strong>Excerpt:</strong>
-                <p class="muted" style="margin:8px 0 0">
+                <p style="margin:8px 0 0">
                   “Hello, my name is Valentina. I am fifteen years old. I live in an apartment with my dad. I wake up at 7:30 and have breakfast—juice, cereal, and cheese.
                   Then I get my backpack and go to school. Classes start at 8:30 and end at 2:30. Tuesdays and Fridays…”
                 </p>
@@ -204,7 +202,7 @@
           <article class="card">
             <div class="content">
               <h3>Contact</h3>
-              <p class="muted"><strong>Rhett Hielscher</strong><br/>Email: rhett.hielscher@example.com • 1234 Willow Creek Rd, Boise, ID 83702</p>
+              <p><strong>Rhett Hielscher</strong><br/>Email: rhett.hielscher@example.com • 1234 Willow Creek Rd, Boise, ID 83702</p>
               <div class="btn-row">
                 <a class="btn outline" href="#samples" data-ripple>View Work</a>
                 <a class="btn primary" href="#reflection" data-ripple>Read Reflection</a>
@@ -217,7 +215,7 @@
   </main>
 
   <footer>
-    <div class="container muted">&copy; 2025 Spanish Class Portfolio</div>
+    <div class="container" style="color:#94a3b8">&copy; 2025 Spanish Class Portfolio</div>
   </footer>
 
   <script>
@@ -249,17 +247,11 @@
       }, {passive:false});
     });
 
-    // Tiny contrast toggle: flips a class on <html> that inverts surface mix slightly.
+    // Tiny contrast toggle
     const toggleBtn = document.getElementById('themeToggle');
     toggleBtn?.addEventListener('click', () => {
       document.documentElement.classList.toggle('contrast');
     });
   </script>
-  <style>
-    /* Contrast tweak after script toggles it */
-    html.contrast{
-      filter: contrast(1.05) saturate(1.05);
-    }
-  </style>
 </body>
 </html>
