@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Spanish Class Portfolio — Material</title>
+  <meta name="description" content="A single‑file Spanish class portfolio with a modern Material look." />
+  <style>
+    /* ============ Material-inspired Design System (no external libs) ============ */
+    :root{
+      --md-sys-color-primary: #6750A4;   /* Material baseline primary */
+      --md-sys-color-on-primary: #FFFFFF;
+      --md-sys-color-secondary: #625B71;
+      --md-sys-color-surface: #FFFBFE;
+      --md-sys-color-surface-variant: #E7E0EC;
+      --md-sys-color-outline: #79747E;
+      --md-sys-color-on-surface: #1C1B1F;
+      --md-sys-elevation-1: 0 1px 2px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08);
+      --md-sys-elevation-2: 0 2px 6px rgba(0,0,0,0.14), 0 6px 12px rgba(0,0,0,0.06);
+      --container-max: 1100px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --md-sys-color-primary: #D0BCFF;
+        --md-sys-color-on-primary: #381E72;
+        --md-sys-color-secondary: #CCC2DC;
+        --md-sys-color-surface: #1C1B1F;
+        --md-sys-color-surface-variant: #49454F;
+        --md-sys-color-outline: #938F99;
+        --md-sys-color-on-surface: #E6E1E5;
+      }
+    }
+    *{ box-sizing:border-box }
+    html,body{ margin:0; padding:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color:var(--md-sys-color-on-surface); background:linear-gradient(180deg, var(--md-sys-color-surface), #fff); }
+    a{ color:inherit; text-decoration:none }
+    .container{ max-width:var(--container-max); margin:0 auto; padding:0 16px }
+    .appbar{ position:sticky; top:0; z-index:10; backdrop-filter:saturate(180%) blur(8px); background:color-mix(in oklab, var(--md-sys-color-surface) 92%, transparent); border-bottom:1px solid var(--md-sys-color-surface-variant) }
+    .appbar-inner{ display:flex; align-items:center; justify-content:space-between; padding:12px 0 }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px }
+    .brand .dot{ width:12px; height:12px; border-radius:50%; background:var(--md-sys-color-primary); box-shadow: 0 0 0 4px color-mix(in oklab, var(--md-sys-color-primary) 25%, transparent) }
+    .nav a{ font-size:14px; padding:8px 10px; border-radius:10px }
+    .nav a:hover{ background:color-mix(in oklab, var(--md-sys-color-primary) 14%, transparent) }
+    .hero{ padding:56px 0 24px }
+    .hero h1{ font-size:clamp(28px, 5vw, 48px); margin:0 0 8px; font-weight:900; letter-spacing:-.02em }
+    .hero p{ margin:0; color:color-mix(in oklab, var(--md-sys-color-on-surface) 70%, transparent) }
+    .btn-row{ display:flex; gap:12px; flex-wrap:wrap; margin-top:20px }
+    /* Material buttons with ripple */
+    .btn{ position:relative; overflow:hidden; display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:999px; border:1px solid transparent; cursor:pointer; user-select:none; transition:transform .04s ease, box-shadow .2s ease }
+    .btn:active{ transform:translateY(1px) }
+    .btn.primary{ background:var(--md-sys-color-primary); color:var(--md-sys-color-on-primary); box-shadow:var(--md-sys-elevation-1) }
+    .btn.outline{ background:transparent; color:var(--md-sys-color-on-surface); border-color:var(--md-sys-color-outline) }
+    .btn.tonal{ background:color-mix(in oklab, var(--md-sys-color-primary) 16%, white); color:var(--md-sys-color-on-surface); box-shadow:var(--md-sys-elevation-1) }
+    .ripple{ position:absolute; border-radius:50%; transform:scale(0); animation:ripple .6s linear; background:color-mix(in oklab, white 60%, var(--md-sys-color-on-surface)); opacity:.35 }
+    @keyframes ripple{ to{ transform:scale(16); opacity:0 } }
+    /* Sections */
+    section{ padding:28px 0 }
+    .section-title{ display:flex; align-items:center; gap:10px; margin-bottom:14px }
+    .chip{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; font-size:12px; border-radius:999px; color:var(--md-sys-color-on-primary); background:var(--md-sys-color-primary) }
+    /* Cards */
+    .grid{ display:grid; grid-template-columns:1fr; gap:16px }
+    @media(min-width:820px){ .grid{ grid-template-columns:1fr 1fr } }
+    .card{ background:#fff; border:1px solid var(--md-sys-color-surface-variant); border-radius:20px; box-shadow:var(--md-sys-elevation-1) }
+    .card .content{ padding:18px }
+    .card h3{ margin:0 0 6px }
+    .muted{ color:color-mix(in oklab, var(--md-sys-color-on-surface) 68%, transparent) }
+    .well{ border:1px dashed var(--md-sys-color-outline); border-radius:16px; padding:14px; background:color-mix(in oklab, #fff 85%, var(--md-sys-color-primary) 4%) }
+    /* Reflection */
+    .prose p{ line-height:1.7; margin:14px 0 }
+    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:color-mix(in oklab, #000 6%, transparent); border:1px solid var(--md-sys-color-outline); padding:1px 6px; border-radius:6px }
+    /* Footer */
+    footer{ padding:32px 0; border-top:1px solid var(--md-sys-color-surface-variant); margin-top:16px }
+    /* Utilities */
+    .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap }
+    .spacer{ height:8px }
+    .about-grid{ display:grid; grid-template-columns:1fr; gap:18px }
+    @media(min-width:900px){ .about-grid{ grid-template-columns:1fr 1fr } }
+  </style>
+</head>
+<body>
+  <header class="appbar">
+    <div class="container appbar-inner">
+      <div class="brand"><span class="dot"></span> <span>Spanish Class • Portfolio</span></div>
+      <nav class="nav">
+        <a href="#samples">Samples</a>
+        <a href="#reflection">Reflection</a>
+        <a href="#about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Spanish Class Portfolio</h1>
+        <p>A modern, single‑file site showcasing my best work and growth this term.</p>
+        <div class="btn-row">
+          <a class="btn primary" href="#samples" data-ripple><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> View Samples</a>
+          <a class="btn outline" href="#reflection" data-ripple>Read Reflection</a>
+          <button class="btn tonal" id="themeToggle" data-ripple>Toggle Contrast</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="samples">
+      <div class="container">
+        <div class="section-title"><span class="chip">Featured</span><h2 style="margin:0">Samples</h2></div>
+        <div class="grid">
+          <!-- SAMPLE #1 -->
+          <article class="card">
+            <div class="content">
+              <h3>Three Benefits of Being Bilingual</h3>
+              <p class="muted">Why I chose it: it communicates key cognitive benefits in a simple, visual way.</p>
+              <div class="spacer"></div>
+              <div class="well">
+                <strong>Highlights:</strong>
+                <ul style="margin:8px 0 0 18px">
+                  <li>Learning a second language in adulthood can encourage a more rational approach when solving problems in that language.</li>
+                  <li>It may delay the onset of Alzheimer’s and dementia.</li>
+                  <li>Bilingualism can potentially strengthen the dorsolateral prefrontal cortex.</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- SAMPLE #2 -->
+          <article class="card">
+            <div class="content">
+              <h3>Independent Translation</h3>
+              <p class="muted">Why I chose it: it reflects independence, control of time expressions, and basic coherence in Spanish.</p>
+              <div class="spacer"></div>
+              <div class="well">
+                <strong>Excerpt:</strong>
+                <p class="muted" style="margin:8px 0 0">
+                  “Hello, my name is Valentina. I am fifteen years old. I live in an apartment with my dad. I wake up at 7:30 and have breakfast—juice, cereal, and cheese.
+                  Then I get my backpack and go to school. Classes start at 8:30 and end at 2:30. Tuesdays and Fridays…”
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- SAMPLE #3 -->
+          <article class="card">
+            <div class="content">
+              <h3>Spanish Schedule</h3>
+              <p class="muted">Why I chose it: it shows control of time‑in‑words and strong organization.</p>
+              <div class="spacer"></div>
+              <div class="well">
+                <strong>Daily Schedule (bilingual format)</strong>
+                <div class="row" style="margin-top:8px">
+                  <div style="flex:1; min-width:240px">
+                    <em>Morning</em>
+                    <ul>
+                      <li><b>7:00 AM</b> — Wake up and stretch · <em>Español:</em> A las siete de la mañana — Despertarse y estirarse</li>
+                      <li><b>8:00 AM</b> — Breakfast & coffee · <em>Español:</em> A las ocho de la mañana — Desayunar y tomar café</li>
+                      <li><b>9:00 AM</b> — Emails & plan · <em>Español:</em> A las nueve de la mañana — Revisar correos y planificar</li>
+                      <li><b>10:00 AM</b> — Go to work · <em>Español:</em> A las diez de la mañana — Ir a trabajar</li>
+                    </ul>
+                  </div>
+                  <div style="flex:1; min-width:240px">
+                    <em>Midday & Evening</em>
+                    <ul>
+                      <li><b>12:00 PM</b> — Lunch break · <em>Español:</em> A las doce del mediodía — Descanso para almorzar</li>
+                      <li><b>1:30 PM</b> — Check emails · <em>Español:</em> A la una y media — Revisar correos electrónicos</li>
+                      <li><b>3:00 PM</b> — Walk/stretch · <em>Español:</em> A las tres de la tarde — Caminar o estirarse</li>
+                      <li><b>6:00 PM</b> — Dinner · <em>Español:</em> A las seis de la tarde — Preparar y cenar</li>
+                      <li><b>7:30 PM</b> — Study · <em>Español:</em> A las siete y media de la noche — Estudiar vocabulario</li>
+                      <li><b>9:00 PM</b> — Relax · <em>Español:</em> A las nueve de la noche — Relajarse</li>
+                      <li><b>10:30 PM</b> — Bedtime prep · <em>Español:</em> A las diez y media de la noche — Prepararse para dormir</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="reflection">
+      <div class="container">
+        <div class="section-title"><span class="chip">Essay</span><h2 style="margin:0">Reflection (250–500 words)</h2></div>
+        <article class="card">
+          <div class="content prose">
+            <p>When I started this class, my Spanish lived in scattered sticky notes—random words, a few phrases, and not much confidence. Now I can actually build a thought, deliver it, and be understood. The three samples on this page map that change pretty well. The “Three Benefits of Being Bilingual” artifact shows I can synthesize ideas and explain them clearly. The independent translation (my Valentina paragraph) proves I can push through a whole thought without stopping at every word. And the Spanish schedule forced me to get comfortable writing time in words and keeping the grammar tidy.</p>
+            <p>A few skills made the difference. First, “chunks”: small, reusable phrases that keep me from freezing. Second, writing and speaking with time in words made me practice rhythm and structure in a real context. Third, pronunciation—especially the silent “h” and consistent “ch”—became a secret cheat code. As my sounds got cleaner, my listening got less stressful. <strong>Contrary to my initial expectations</strong>, pronunciation wasn’t just polish; it actually unlocked comprehension and confidence.</p>
+            <p>Octagonal thinking was a surprise MVP. Looking at a task through eight angles—language, culture, pronunciation, grammar, context, audience, purpose, and self‑evaluation—stopped me from seeing assignments as boxes to check. It turned each piece into a mini‑project where I asked: who am I talking to, what am I trying to do, and how will I know I did it well? That mindset shift made practice feel practical.</p>
+            <p>I still hit walls. My instinct is to translate word‑for‑word, which makes everything sound robotic. To fix that, I’ve been leaning on chunks, reading my lines out loud, and recording quick voice notes to catch awkward phrasing. I also built simple bilingual templates so I can focus on meaning instead of formatting.</p>
+            <p>Next steps are concrete: expand my chunk library for common situations (travel, stores, emergencies), practice a few core verb tenses inside short stories, and add 5–10 minutes of daily listening. I’ll keep doing weekly check‑ins with the octagonal lens. Goal: hold a three‑to‑five‑minute conversation without a script and feel comfortable enough to improvise when life throws curveballs—in Spanish.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-title"><span class="chip">Info</span><h2 style="margin:0">About & Contact</h2></div>
+        <div class="about-grid">
+          <article class="card">
+            <div class="content">
+              <h3>About Me</h3>
+              <p class="muted">I’m a Spanish student collecting evidence of communicative, cultural, and pronunciation growth throughout this course. This site is a single HTML file with inline CSS & JS—clean, portable, and easy to publish.</p>
+            </div>
+          </article>
+          <article class="card">
+            <div class="content">
+              <h3>Contact</h3>
+              <p class="muted"><strong>Rhett Hielscher</strong><br/>Email: rhett.hielscher@example.com • 1234 Willow Creek Rd, Boise, ID 83702</p>
+              <div class="btn-row">
+                <a class="btn outline" href="#samples" data-ripple>View Work</a>
+                <a class="btn primary" href="#reflection" data-ripple>Read Reflection</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container muted">&copy; 2025 Spanish Class Portfolio</div>
+  </footer>
+
+  <script>
+    // Minimal ripple implementation for any element with data-ripple
+    document.addEventListener('click', function(e){
+      const target = e.target.closest('[data-ripple]');
+      if(!target) return;
+      const rect = target.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      const size = Math.max(rect.width, rect.height);
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+      target.appendChild(ripple);
+      setTimeout(()=>ripple.remove(), 600);
+    }, {passive:true});
+
+    // Smooth anchor scrolling
+    document.querySelectorAll('a[href^=\"#\"]').forEach(a => {
+      a.addEventListener('click', (ev) => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          ev.preventDefault();
+          el.scrollIntoView({behavior:'smooth', block:'start'});
+          history.replaceState(null, '', '#' + id);
+        }
+      }, {passive:false});
+    });
+
+    // Tiny contrast toggle: flips a class on <html> that inverts surface mix slightly.
+    const toggleBtn = document.getElementById('themeToggle');
+    toggleBtn?.addEventListener('click', () => {
+      document.documentElement.classList.toggle('contrast');
+    });
+  </script>
+  <style>
+    /* Contrast tweak after script toggles it */
+    html.contrast{
+      filter: contrast(1.05) saturate(1.05);
+    }
+  </style>
+</body>
+</html>
